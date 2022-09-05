@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './Component/cart/cart.component';
 import { ForgotpasswordComponent } from './Component/forgotpassword/forgotpassword.component';
 import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path:"forgotpassword",component:ForgotpasswordComponent},
   {path:"home/:token",component:HomeComponent},
   {path:"verification",component:VerifyotpComponent},
+  {path:"cart",component:CartComponent},
+  {path:"cart/:token",component:CartComponent}
 ];
 
 @NgModule({

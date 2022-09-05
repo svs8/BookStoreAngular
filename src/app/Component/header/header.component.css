@@ -12,7 +12,7 @@
     letter-spacing: 0px;
     text-transform: uppercase;
     opacity: 1;
-    color: white;
+    color: rgb(237, 228, 228);
     margin-left: 10px;
     margin-right: 20px;
   }
@@ -20,7 +20,7 @@
   
   .btn {
     font: normal normal normal 22px/29px Roboto;
-    background-color: #1073dc;
+    background-color: #7995b3;
     border: none;
     color: white;
     text-align: center;
@@ -57,8 +57,8 @@ form {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
+    color: #789fc5;
+    background-color: rgb(147, 132, 132);
     background-clip: padding-box;
     border: 1px solid #ced4da;
     -webkit-appearance: none;
@@ -69,7 +69,7 @@ form {
 }
 
 .navbar{
-    background-color:#78244C;
+    background-color:#130c11;
 }
 .cart{
   margin-left: 100mm;

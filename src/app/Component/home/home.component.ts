@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/BookStoreService/book.service';
+import { CartService } from 'src/app/BookStoreService/cart.service';
 
 import { UserService } from 'src/app/BookStoreService/user.service';
+import { CartModel } from 'src/app/Model/cart-model';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,15 @@ import { UserService } from 'src/app/BookStoreService/user.service';
 export class HomeComponent implements OnInit {
 
  
-  // Variable to store list of books
+  
   books: any;
-  // path to get the image
+  
   imagePath = "../../../assets/bookimg/"
+ // object to store the cart model
+ myCart: CartModel = new CartModel(0, 0, 0);
 
+ 
+ carts!: any;
  
   sortby!: string;
 
@@ -28,7 +34,7 @@ export class HomeComponent implements OnInit {
   
   userId: any;
 
-  constructor( private route: Router, private userService: UserService, private bookService: BookService, private getRoute: ActivatedRoute) { }
+  constructor( private route: Router, private userService: UserService, private bookService: BookService, private cartService: CartService, private getRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -39,8 +45,11 @@ export class HomeComponent implements OnInit {
       this.userId = data.data;
     });
 
-    // To get the list of books from the data base this function is called when the home component is loaded
+   
     this.getAllBooks();
+
+   
+    this.getAllCart();
 
 
   }
@@ -53,9 +62,49 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getAllCart() {
+    this.cartService.getAllCarts().subscribe(mydata => {
+      this.carts = mydata;
+    });
+  }
+
+  
+  //when the user hits the "Add To Cart Button" ,It check's that book is already  present in the cart or not If book is present in the cart then it shows the alert in the home that book is already present else it saves the book to the cart repository in 
+  addToCart(bookId: number) {
+    let i = 0
+    if (this.carts.data != 0) {//Checking if thecart is empty
+      for (; i < this.carts.data.length; i++) {//checking till n-1
+        if (this.carts.data[i].book.bookId == bookId) {
+          alert("book is already in cart");
+
+          break;
+        }
+      }
+
+      if (i == this.carts.data.length) {//in the nth 
+        this.myCart.bookId = bookId;
+        this.myCart.userId = this.userId;
+        this.myCart.quantity = 1;
+        this.cartService.saveCart(this.myCart).subscribe((getdata: any) => {
+          this.carts = getdata;
+          window.location.reload();
+
+        });
+      }
+    } else {//if no data in cart adds the items
+      this.myCart.bookId = bookId;
+      this.myCart.userId = this.userId
+      this.myCart.quantity = 1;
+      this.cartService.saveCart(this.myCart).subscribe((getdata: any) => {
+        this.carts = getdata;
+        window.location.reload();
+      });
+    }
+  }
 
 
-  //This function defines the logic of the sorting .
+
+  
   sort() {
     if (this.sortby == "Increasing") {
       this.bookService.sortBookInAscending().subscribe((data: any) => {
@@ -67,7 +116,7 @@ export class HomeComponent implements OnInit {
         this.books = data;
 
       });
-    } if (this.sortby == "default") {
+    } if (this.sortby == "Sort By Relevance") {
       this.bookService.getAllBooks().subscribe((data: any) => {
         this.books = data;
 
@@ -75,12 +124,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
-
-
-
-  // This function is triggred when the user hits the "search tab",
-  // It searched the data on the basis of books name form the data-base through the service layer
+ 
   searchByBookname() {
     if (this.search != '') {
       this.bookService.searchBookByName(this.search).subscribe((getData: any) => {
@@ -93,8 +137,14 @@ export class HomeComponent implements OnInit {
   }
 
   
+   toCartOnClickAddtoBag() {
+    this.route.navigate(["cart", this.userToken]);
+  }
 
-  // This function is triggred when the user hits the "logout logo" in view, it redirects the user to the login component
+
+  
+
+ 
   tologinPage() {
     this.route.navigate(["login"]);
 

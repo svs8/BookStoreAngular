@@ -24,6 +24,7 @@ export class ForgotpasswordComponent implements OnInit {
   onlogin(){
     this.userService.forgotPasswordUser(this.email,this.newPassword).subscribe((getData: any) =>{
       console.log(getData);
+      //The password is updated in the Database
     });
     alert("Password Updated Successfully please login using new password");
     this.route.navigate(["login"]);

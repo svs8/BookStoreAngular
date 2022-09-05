@@ -11,6 +11,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { VerifyotpComponent } from './Component/verifyotp/verifyotp.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CartComponent } from './Component/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     ForgotpasswordComponent,
     HomeComponent,
-    VerifyotpComponent
+    VerifyotpComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
