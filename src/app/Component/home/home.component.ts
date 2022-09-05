@@ -4,7 +4,9 @@ import { BookService } from 'src/app/BookStoreService/book.service';
 import { CartService } from 'src/app/BookStoreService/cart.service';
 
 import { UserService } from 'src/app/BookStoreService/user.service';
+import { WishlistService } from 'src/app/BookStoreService/wishlist.service';
 import { CartModel } from 'src/app/Model/cart-model';
+import { Wishlist } from 'src/app/Model/wishlist';
 
 @Component({
   selector: 'app-home',
@@ -21,20 +23,23 @@ export class HomeComponent implements OnInit {
  // object to store the cart model
  myCart: CartModel = new CartModel(0, 0, 0);
 
+ myWishlist: Wishlist = new Wishlist(0, 0, 1);
+
  
  carts!: any;
  
   sortby!: string;
 
   search: any;
+
+  wishlists: any
  
-   
   userToken = this.getRoute.snapshot.paramMap.get("token");
 
   
   userId: any;
 
-  constructor( private route: Router, private userService: UserService, private bookService: BookService, private cartService: CartService, private getRoute: ActivatedRoute) { }
+  constructor(private wishService: WishlistService,private route: Router, private userService: UserService, private bookService: BookService, private cartService: CartService, private getRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -51,7 +56,16 @@ export class HomeComponent implements OnInit {
    
     this.getAllCart();
 
+    this.getAllWishList();
 
+
+  }
+
+  getAllWishList() {
+    this.wishService.getAllWishlistRecords().subscribe(data => {
+      this.wishlists = data;
+
+    })
   }
 
  
@@ -149,7 +163,40 @@ export class HomeComponent implements OnInit {
     this.route.navigate(["login"]);
 
   }
- 
 
-  
+  wishlist() {
+    this.route.navigate(["wishlist", this.userToken]);
+  }
+
+  addToWishList(bookId: number) {
+    let i = 0
+    if (this.wishlists.data != 0) {
+      for (; i < this.wishlists.data.length; i++) {
+        //this.wishlists.data[i].book.bookId 
+        if (this.wishlists.data[i].book.bookId == bookId) {
+          alert("book is already in WISHLIST");
+          console.log("cons 0")
+          break;
+        }
+      }
+      if (i == this.wishlists.data.length) {
+        this.myWishlist.bookId = bookId;
+        this.myWishlist.userId = this.userId
+        this.myWishlist.quantity = 1;
+        this.wishService.saveWishList(this.myWishlist).subscribe((getdata: any) => {
+          this.carts = getdata;
+          window.location.reload();
+        });
+      }
+    } else {
+      this.myWishlist.bookId = bookId;
+      this.myWishlist.userId = this.userId
+      this.myWishlist.quantity = 1;
+      this.wishService.saveWishList(this.myWishlist).subscribe((getdata: any) => {
+        this.wishlists = getdata;
+        window.location.reload();
+      });
+    }
+  }
+
 }

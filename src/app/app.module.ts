@@ -12,6 +12,7 @@ import { VerifyotpComponent } from './Component/verifyotp/verifyotp.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './Component/cart/cart.component';
+import { WishlistComponent } from './Component/wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CartComponent } from './Component/cart/cart.component';
     ForgotpasswordComponent,
     HomeComponent,
     VerifyotpComponent,
-    CartComponent
+    CartComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,

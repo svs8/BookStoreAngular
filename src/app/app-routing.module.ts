@@ -6,6 +6,7 @@ import { HomeComponent } from './Component/home/home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { RegisterComponent } from './Component/register/register.component';
 import { VerifyotpComponent } from './Component/verifyotp/verifyotp.component';
+import { WishlistComponent } from './Component/wishlist/wishlist.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -16,7 +17,9 @@ const routes: Routes = [
   {path:"home/:token",component:HomeComponent},
   {path:"verification",component:VerifyotpComponent},
   {path:"cart",component:CartComponent},
-  {path:"cart/:token",component:CartComponent}
+  {path:"cart/:token",component:CartComponent},
+  {path:"wishlist",component:WishlistComponent},
+  {path:"wishlist/:token",component:WishlistComponent},
 ];
 
 @NgModule({

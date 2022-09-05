@@ -25,7 +25,9 @@
       <span style="margin-left:1mm ;margin-right:5mm;color: rgb(252, 249, 249);">{{carts.data.length}}</span>
   
       <img style="height: 9.5mm;margin-left: 3mm; margin-right: 1mm;"  class="cartlogo"
-      src="../../../assets/wish8.png"  alt="wishlist logo" />
+      src="../../../assets/wish8.png"  (click)="wishlist()" alt="wishlist logo" />
+
+      <span style="margin-left:1mm ;margin-right:5mm;color: rgb(252, 249, 249);">{{wishlists.data.length}}</span>
   
       
      
@@ -61,7 +63,7 @@
           <!-- This button addeds the books to cart  -->
           <button type="button" class="red" *ngIf="book.quantity!=0" (click)="addToCart(book.bookId)">Add to Bag</button>
           <button type="button" style="background-color: silver;" class="red" *ngIf="book.quantity==0">Add to Bag</button>
-          <button type="button" class="red" style="margin-left: 5mm;" >Wishlist</button>
+          <button type="button" class="red" style="margin-left: 5mm;" (click)="addToWishList(book.bookId)">Wishlist</button>
         
           <!-- <button type="button" class="button wishlist">Wishlist</button> -->
         </div>
