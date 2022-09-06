@@ -172,7 +172,6 @@ export class HomeComponent implements OnInit {
     let i = 0
     if (this.wishlists.data != 0) {
       for (; i < this.wishlists.data.length; i++) {
-        //this.wishlists.data[i].book.bookId 
         if (this.wishlists.data[i].book.bookId == bookId) {
           alert("book is already in WISHLIST");
           console.log("cons 0")

@@ -11,30 +11,30 @@ import { CartModel } from 'src/app/Model/cart-model';
 })
 export class WishlistComponent implements OnInit {
 
- // Variable to store list of wishlist data  
+  
  wishlist!: any;
- // path of books image
+ 
  imagePath = "../../../assets/bookimg/"
- // Model object to cart .
+ 
  mycart: CartModel = new CartModel(0, 0, 1);
 
  token=this.route.snapshot.paramMap.get('token')
 
- // home button 
+
  toHomePage() {
    this.router.navigate(["home",this.token]);
  }
 
 
- // Injected all the depencencies to the Constructor : Wishlist-Service,book-Service,Router, cart-Service
+
  constructor(private wishService: WishlistService, private router: Router, private cartService: CartService,private route:ActivatedRoute) { }
 
- // It is triggred when this component is initilised
+ 
  ngOnInit(): void {
    this.getAllWishList();
  }
 
- // To get the list of wishlist from the data-base this function is called 
+ 
  getAllWishList() {
    this.wishService.getAllWishlistRecords().subscribe((data: any) => {
      if (data.data.length == 0) {
@@ -45,7 +45,7 @@ export class WishlistComponent implements OnInit {
  }
 
 
- // When function is triggred it takes cardId as parameter and then delete the cart from the database cart table using cart service  
+ 
  deleteWishlist(wishlistId: any) {
    this.wishService.deleteWishlistRecordById(wishlistId).subscribe(data => {
      window.location.reload();
@@ -53,8 +53,7 @@ export class WishlistComponent implements OnInit {
 
  }
 
- // This function is triggred when the user hits add to bag button , 
- // It moves the book from wishlist to cart in database 
+ 
  addToBag(bookId: any, userId: any, wishlist: number) {
    this.mycart.bookId = bookId;
    this.mycart.userId = userId;

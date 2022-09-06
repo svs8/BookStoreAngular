@@ -11,7 +11,6 @@ export class VerifyotpComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService) { }
 
-  // To store the user entered  email for login from ng model
   email!: string;
 
   otp!: number;
