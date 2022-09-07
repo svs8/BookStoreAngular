@@ -12,7 +12,7 @@
       </div>
       <div class="message" >
         <h6>Congratulations!!!your order is confirmed</h6>
-        <h6>the order id  is</h6><h6 *ngFor="let order of this.order.data"> #{{order.orderID}}</h6><h6>save the order id for</h6>
+        <h6>the order id  is</h6><h6> {{order.data[0].orderID}}</h6><h6>save the order id for</h6>
         <h6>further communication.</h6>
       </div>
       <div class="table-details">

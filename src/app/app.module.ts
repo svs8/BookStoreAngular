@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './Component/cart/cart.component';
 import { WishlistComponent } from './Component/wishlist/wishlist.component';
+import { UserDetailsToPlaceOrderComponent } from './Component/user-details-to-place-order/user-details-to-place-order.component';
+import { OrdersummaryComponent } from './Component/ordersummary/ordersummary.component';
+import { OrderplacedComponent } from './Component/orderplaced/orderplaced.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { WishlistComponent } from './Component/wishlist/wishlist.component';
     HomeComponent,
     VerifyotpComponent,
     CartComponent,
-    WishlistComponent
+    WishlistComponent,
+    UserDetailsToPlaceOrderComponent,
+    OrdersummaryComponent,
+    OrderplacedComponent
   ],
   imports: [
     BrowserModule,

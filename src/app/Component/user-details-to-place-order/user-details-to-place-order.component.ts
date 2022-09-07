@@ -40,7 +40,8 @@ export class UserDetailsToPlaceOrderComponent implements OnInit {
   
   updateUser() {
     // this.userService.updateUserRecordById(this.user.userId, this.user).subscribe(data => {
-    //   this.router.navigate(["ordersummery",this.usertoken]);
+    //   // this.router.navigate(["ordersummery",this.usertoken]);
+    //   console.log(data)
     // })
     this.router.navigate(["ordersummery",this.usertoken]);
   }

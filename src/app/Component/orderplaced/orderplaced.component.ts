@@ -21,7 +21,7 @@ export class OrderplacedComponent implements OnInit {
 
    
     this.orderService.getAllOrders().subscribe((getData: any) => {
-      this.order = getData.data.get;
+      this.order = getData;
       console.log("the order is :",this.order)
     })
 

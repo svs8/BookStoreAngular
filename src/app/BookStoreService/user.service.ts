@@ -42,7 +42,7 @@ getloginStatus(email:string, password:string){
    return this.http.get("http://localhost:8082/user/forgotpassword?email="+email+"&newPassword="+newPassword);
  }
 
- updateUserRecordById(Id:any,user:any){
-   return this.http.put("http://localhost:8082/user/update/"+Id,user);
+ updateUserRecordById(Id:any,userRegistrationModel:any){
+   return this.http.put("http://localhost:8082/user/update/"+Id,userRegistrationModel);
  }
 }
