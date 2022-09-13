@@ -41,7 +41,8 @@
             </select>
           </div>
     
-      
+          <button type="button" style="background-color: rgb(251, 249, 255);" class="log" (click)="tologinPage()">Login</button>
+          
     </div>
   </header>
   
@@ -62,8 +63,8 @@
           
           <!-- This button addeds the books to cart  -->
           <button type="button" class="red" *ngIf="book.quantity!=0" (click)="addToCart(book.bookId)">Add to Bag</button>
-          <button type="button" style="background-color: silver;" class="red" *ngIf="book.quantity==0">Add to Bag</button>
-          <button type="button" class="red" style="margin-left: 5mm;" (click)="addToWishList(book.bookId)">Wishlist</button>
+          <button type="button" style="background-color: rgb(239, 236, 236);" class="red" *ngIf="book.quantity==0">Add to Bag</button>
+          <button type="button" class="green" style="margin-left: 5mm;" (click)="addToWishList(book.bookId)">Wishlist</button>
         
           <!-- <button type="button" class="button wishlist">Wishlist</button> -->
         </div>

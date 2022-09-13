@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/BookStoreService/cart.service';
+import { DeliveryService } from 'src/app/BookStoreService/delivery.service';
 import { OrderService } from 'src/app/BookStoreService/order.service';
 import { OrderModel } from 'src/app/Model/order-Model';
 
@@ -11,12 +12,14 @@ import { OrderModel } from 'src/app/Model/order-Model';
 })
 export class OrdersummaryComponent implements OnInit {
 
-  constructor(private router: Router, private orderService: OrderService, private cartService: CartService,private route:ActivatedRoute) { }
+  constructor(private router: Router, private orderService: OrderService, private cartService: CartService,private route:ActivatedRoute,private deliveryService: DeliveryService) { }
 
   
   order: OrderModel = new OrderModel(0, "", 0, 0, 0, false);
   
   cart!: any
+
+  deliveryDetails!:any
 
   imagePath = "../../../assets/bookimg/"
 
@@ -29,6 +32,14 @@ export class OrdersummaryComponent implements OnInit {
       console.log("-----")
       console.log(this.cart);
     });
+
+    this.deliveryService.getAllDeliveryDetails().subscribe((data: any) => {
+      this.deliveryDetails = data;
+      console.log("-----")
+      console.log(this.deliveryDetails);
+      console.log(this.deliveryDetails[0].address)
+    });
+
   }
 
 
@@ -46,7 +57,7 @@ export class OrdersummaryComponent implements OnInit {
       this.order.quantity = this.cart.data[i].quantity;
       this.order.price = this.cart.data[i].book.price*this.order.quantity;
       console.log("The totel price  ",this.order.price)
-      this.order.address = "Mangalore";
+      this.order.address = this.deliveryDetails[0].address
       this.order.cancel = false;
       this.orderService.postOrder(this.order).subscribe((getData: any) => {
         this.order = getData;
@@ -54,6 +65,8 @@ export class OrdersummaryComponent implements OnInit {
 
       });
       this.cartService.deleteCartByCartId(this.cart.data[i].cartId).subscribe(data => {
+      });
+      this.deliveryService.deletedeliveryDetails(this.deliveryDetails[0].personId).subscribe(data => {
       });
 
     }

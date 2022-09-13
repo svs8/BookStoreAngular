@@ -14,7 +14,7 @@ import { WishlistComponent } from './Component/wishlist/wishlist.component';
 const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"register",component:RegisterComponent},
-  {path:"",component:LoginComponent},
+  {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
   {path:"forgotpassword",component:ForgotpasswordComponent},
   {path:"home/:token",component:HomeComponent},
